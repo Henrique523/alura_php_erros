@@ -8,10 +8,10 @@ function funcao1()
 
     try {
         funcao2();
-    } catch (RuntimeException | DivisionByZeroError $erroOuExcecao) {
-        echo $erroOuExcecao->getMessage() . PHP_EOL;
-        echo $erroOuExcecao->getLine() . PHP_EOL;
-        echo $erroOuExcecao->getTraceAsString() . PHP_EOL;
+    } catch (Throwable $problema) {
+        echo $problema->getMessage() . PHP_EOL;
+        echo $problema->getLine() . PHP_EOL;
+        echo $problema->getTraceAsString() . PHP_EOL;
     }
 
     echo 'Saindo da função 1' . PHP_EOL;
@@ -21,7 +21,8 @@ function funcao2()
 {
     echo 'Entrei na função 2' . PHP_EOL;
 
-    $excepction = new RuntimeException();
+    intdiv(1, 0);
+    $excepction = new BadFunctionCallException('Essa é a mensagem de exceção');
     throw $excepction;
 
     echo 'Saindo da função 2' . PHP_EOL;
